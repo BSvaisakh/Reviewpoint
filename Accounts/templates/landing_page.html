@@ -1,0 +1,52 @@
+{% load static %} 
+{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/landing_page.css' %}">
+</head>
+<body>
+   <!-- <img src="../static/images/background.jpg" alt="" class="background-image"> -->
+    <div class="main-container">
+        <div class="search">
+            <form action="">
+                {% csrf_token %}
+                <input type="search" placeholder="Search Shows By Name" class="search-inp">
+                <input type="submit" placeholder="Search" class="search-btn">
+            </form>  
+        </div>
+        <div class="movie-head">
+            <h1>Movies</h1>
+        </div>
+        <div class="web-head">
+            <h1>Web Series</h1>
+        </div>
+        <div class="ani-head">
+            <h1>Animes</h1>
+        </div>
+        <div class="types">
+            <div class="movies">
+                <img src="{% static 'images/movie-posters.jpg' %}" alt="">
+                <div class="about">
+                    <a href=""><h4>Movies</h4></a>
+                 </div>
+            </div>
+            <div class="movies">
+                <img src="{% static 'images/web-posters-new.jpg' %}" alt="">
+                <div class="about">
+                   <a href=""><h4>Movies</h4></a>
+                </div>
+            </div>
+            <div class="movies">
+                <img src="{% static 'images/anime-poster.jpg' %}" alt="">
+                <div class="about">
+                    <a href=""><h4>Movies</h4></a>
+                 </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

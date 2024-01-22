@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <h1><a href="">Review Point</a></h1>
+        </div>
+        <div class="fields">
+            <p>Unlimited Shows</p>
+            <button class="my-account"><a href="" class="pofile">{{data}}</a></button>
+            <button class="logout-btn"><a href="{% url 'logout' %}" class="logout">logout</a></button>
+        </div>
+    </div>
+</body>
+</html>

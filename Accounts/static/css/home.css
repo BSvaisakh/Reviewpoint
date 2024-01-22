@@ -1,0 +1,226 @@
+body{
+    max-height: 100vh;
+    line-height: 1.5;
+    font-size: 16px;
+	overflow: hidden;
+}
+
+*
+{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+.main-img{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+}
+
+.box1{
+    width: 350px;
+    height: 100%;
+    margin-right: 200px;
+	padding-left: 20px;
+    margin-top: 20px;
+	position: relative;
+	/* animation: slideUp 1.5s ease-in-out forwards; */
+	/* transform-style: preserve-3d;
+ 	animation: flip 1.5s ease-in-out forwards;	  */
+	animation: tada 2s cubic-bezier(.64,-0.35,.36,1.35) both;
+	/* opacity: 0; */
+	/* transform: translateX(100%) rotate(180deg);
+	animation: rollIn 2s ease-in-out forwards; */ 
+	animation: lightSpeedIn 1.5s ease-in-out;
+		
+	
+
+}
+.main-container{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+   
+}
+ 
+.about{
+    margin-left: 120px;
+    margin-top: 100px;
+    width: 500px;
+	position: relative;
+	animation: slideRight 1.3s ease-in-out forwards;
+	
+}
+
+.about p{
+   color: rgba(245, 245, 245, 0.6);
+   margin-top: 100px;
+   font-size: 20px;
+   position: relative;
+   /* animation: slideRight 2s ease-in-out forwards; */
+   
+}
+span{
+    color: #CF0A0A;
+}
+
+
+.head-img{
+    position: relative;
+    width: 500px;
+	transform-style: preserve-3d;
+ 	/* animation: flip 1.5s ease-in-out forwards;	  */
+	 /* animation: tada 2s cubic-bezier(.64,-0.35,.36,1.35) both; */
+	
+	
+	
+
+}
+
+.main{
+	width: 350px;
+	height: 500px;
+	overflow: hidden;
+	
+}
+#chk{
+	display: none;
+}
+.signup{
+	position: relative;
+	width:100%;
+	height: 100%;
+}
+label{
+	color: #fff;
+	font-size: 2.3em;
+	justify-content: center;
+	display: flex;
+	margin: 60px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: .5s ease-in-out;
+}
+input{
+	width: 75%;
+	height: 43px;
+	background: #e0dede;
+	justify-content: center;
+	display: flex;
+	margin: 20px auto;
+	padding: 10px;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+}
+button{
+	width: 60%;
+	height: 43px;
+	margin: 10px auto;
+	justify-content: center;
+	display: block;
+	color: #fff;
+	background: steelblue;
+	font-size: 1em;
+	font-weight: bold;
+	margin-top: 20px;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	transition: .2s ease-in;
+	cursor: pointer;
+}
+button:hover{
+	background: rgb(54, 138, 207);
+}
+.login{
+	height: 460px;
+	background: #eee;
+	border-radius: 60% / 10%;
+	transform: translateY(-180px);
+	transition: .8s ease-in-out;
+}
+.login label{
+	color: #CF0A0A;
+	transform: scale(.6);
+}
+
+#chk:checked ~ .login{
+	transform: translateY(-500px);
+}
+#chk:checked ~ .login label{
+	transform: scale(1);	
+}
+#chk:checked ~ .signup label{
+	transform: scale(.6);
+}
+
+@keyframes slideRight {
+	0% {
+	  left: -100%; /* Start off the screen to the left */
+	}
+	100% {
+	  left: 0; /* Slide in to the right */
+	}
+}
+
+ @keyframes slideUp {
+	0% {
+	  top: 100%; /* Start off the screen at the bottom */
+	 }
+	100% 
+	{
+	  top: 0; /* Slide up to the top */
+	 } 
+} 
+
+/* @keyframes pulse {
+	0%, 100% {
+	  transform: scale(1);
+	}
+	50% {
+	  transform: scale(1.1);
+	}
+} */
+
+/* @keyframes flip {
+	to {
+	  transform: rotateY(360deg);
+	}
+  } */
+
+  @keyframes tada {
+	0%, 100% {
+	  transform: scale(1);
+	}
+	10%, 20% {
+	  transform: scale(0.9) rotate(-3deg);
+	}
+	30%, 50%, 70%, 90% {
+	  transform: scale(1.1) rotate(3deg);
+	}
+	40%, 60%, 80% {
+	  transform: scale(1.1) rotate(-3deg);
+	}
+}
+
+
+/* @keyframes rollIn {
+	to {
+	  opacity: 1;
+	  transform: translateX(0) rotate(0);
+	}
+  } */
+
+@keyframes lightSpeedIn {
+	0% {
+	  transform: translateX(100%) skewX(-30deg);
+	  opacity: 0;
+	}
+	100% {
+	  transform: translateX(0) skewX(0);
+	  opacity: 1;
+	}
+}

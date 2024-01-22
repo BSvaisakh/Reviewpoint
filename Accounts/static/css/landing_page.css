@@ -1,0 +1,134 @@
+body {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('../images/cinestrip.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh; /*Ensure the background covers the entire viewport height */
+    margin: 0; 
+}
+  
+
+
+
+.search{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    position: relative;
+    
+}
+.search-inp{
+    width: 550px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+    margin-right: 5px;
+    color: #fff;
+    font-size: 17px;
+    border: 1px solid white;
+}
+.search-btn{
+    width: 100px;
+    height: 40px;
+    background-color:  transparent;
+    border: 1px solid white;
+    color: #fff;
+}
+.search-btn:hover{
+   font-size: 15px;
+}
+.types{
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    justify-content: center;
+    gap: 2.5rem;
+    overflow: hidden;
+    width: 900px;
+    height: 400px;
+    /* background-color: red; */
+    top: -75px;
+    left: 180px;
+    padding-top: 70px;
+    padding-left: 40px;
+}
+
+.movies{
+    position: relative;
+    width: 220px;
+    height: 240px;
+    border: none;
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    /* flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+    box-shadow: 0 0 1rem;
+    
+}
+.movies img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: .5s ease;
+   
+}
+.movies img:hover{
+    transform: scale(1.1);
+}
+.about h4{
+    position: relative;
+    color: white;
+    font-size: 2rem;
+}
+.about a{
+    position: relative;
+    color:rgba(253, 253, 253, 0.811)
+}
+.about{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0,0,0,.1),aqua);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 4rem;
+    transform: translateY(100%);
+}
+
+.about:hover img{
+    transform: scale(1.1);
+}
+.movie-head{
+    position: relative;
+    /* background-color: red; */
+    color: white;
+    width: 100px;
+    top: 50px;
+    left: 290px;
+}
+.web-head{
+    position: relative;
+    /* background-color: red; */
+    color: white;
+    width: 180px;
+    top: 3px;
+    left: 535px;
+    text-align: center;
+}
+.ani-head{
+    position: relative;
+    /* background-color: red; */
+    color: white;
+    width: 180px;
+    top: -47px;
+    left: 835px;
+    text-align: center;
+}
