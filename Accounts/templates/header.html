@@ -11,6 +11,11 @@
     <div class="header">
         <div class="logo">
             <h1><a href="">Review Point</a></h1>
+            {% if data %}
+                {{pass}}
+            {% elif movies %}
+            <button>Add movies</button>
+            {% endif %}
         </div>
         <div class="fields">
             <p>Unlimited Shows</p>
@@ -24,5 +29,6 @@
            
         </div>
     </div>
+    
 </body>
 </html>

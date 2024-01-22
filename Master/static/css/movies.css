@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    
+}
+
+.movie-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding: 30px;
+        width: 100%;
+        background-image: linear-gradient(to top, rgba(0, 0, 0, 0.831) 0, rgba(0, 0, 0, 0.242) 60%, rgba(0, 0, 0, 0.616) 100%),url(../images/background.jpg)       
+}
+
+.movie-card {
+    width: 235px;
+    height:330px;
+    margin: 22px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-left: 40px;
+    background-color: rgba(0, 0, 0, 0.578);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 45vh;
+    border-bottom: 1px solid #ddd;
+}
+
+.movie-info {
+    padding: 10px;
+}
+
+.movie-info h2 {
+    margin-top: 0;
+    font-size: 18px;
+    color: white;
+}
+
+.movie-info p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #555;
+}

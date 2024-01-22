@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.models import User
+from .models import *
 # Create your views here.
 
 def master_page(request):
@@ -25,4 +26,9 @@ def usermanagement(request):
     return render(request,"usermanage.html",{"users" : users})     
 
 def moviemanagement(request):
-    return render(request,"movies.html")     
+    
+    allmovies = Movie.objects.all()
+    context = {
+        "movies" : allmovies
+    } 
+    return render(request,"movies.html",context)     
