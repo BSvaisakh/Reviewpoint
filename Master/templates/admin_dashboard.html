@@ -1,11 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
 </head>
 <body>
-    <h1>Successfull!!</h1>
+    {% include 'header.html' %}
+    <div class="cards">
+        <a href="{% url 'usermanagement' %}"><button>User <br>Management</button></a>
+        <a href="{% url 'moviemanagement' %}"><button>Movies <br> Management</button></a>
+        <a href="#"><button>Web Series <br> Management</button></a>
+        <a href="#"><button>Anime <br> Management</button></a>
+    </div>
 </body>
 </html>

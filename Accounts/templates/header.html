@@ -14,8 +14,14 @@
         </div>
         <div class="fields">
             <p>Unlimited Shows</p>
-            <button class="my-account"><a href="" class="pofile">{{data}}</a></button>
+            {% if data %}
+            <button class="my-account"><a href="" class="profile">{{data}}</a></button>
+            {% else %}
+            <button class="my-account"><a href="" class="profile">My Account</a></button>
+            {% endif %}
             <button class="logout-btn"><a href="{% url 'logout' %}" class="logout">logout</a></button>
+            
+           
         </div>
     </div>
 </body>

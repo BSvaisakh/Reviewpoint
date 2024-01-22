@@ -1,0 +1,22 @@
+.cards{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cards button{
+    margin: 40px;
+    width: 220px;
+    height: 130px;
+    background-color:rgb(40, 143, 226) ;
+    border: none;
+    border-radius: 15px;
+    transition: .2s ease-in-out;
+}
+
+.cards button:hover{
+    transform: scale(1.1);
+}
+.cards button{
+    color: white;
+    
+}

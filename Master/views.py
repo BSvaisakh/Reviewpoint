@@ -19,3 +19,10 @@ def admin_login(request):
         else :
             return redirect('home')
     return redirect('home')
+
+def usermanagement(request):
+    users = User.objects.all()
+    return render(request,"usermanage.html",{"users" : users})     
+
+def moviemanagement(request):
+    return render(request,"movies.html")     

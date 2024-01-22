@@ -1,0 +1,49 @@
+.usertable{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.usertable h1{
+    color: #CF0A0A;
+    margin-bottom: 20px;
+}
+table{
+    width: 700px;
+    height: 150px;
+    
+    
+    
+}
+td{
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 3px;
+    color: white;
+}
+th{
+    padding: 10px;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 3px;
+    color: white;
+}
+a{
+	
+    color: rgb(44, 127, 195);
+}
+button a{
+    color: white;
+}
+.usertable button{
+    position: relative;
+    left: 290px;
+    top: 10px;
+    width: 80px;
+    
+    height: 34px;
+	background: steelblue;
+    border: none;
+    border-radius: 5px;
+}

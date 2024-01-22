@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/usermanage.css' %}">
+
+    <style>
+        button{
+            cursor: pointer;
+            color: white;
+        }
+        
+    </style>
+
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="usertable">
+    <h1>User Table</h1>
+    <table border= "1">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <!-- <th>Password</th> -->
+                <!-- Add more columns for additional user class details -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td><a href="">{{user.username}}</a></td>
+                    <!-- {% comment %} <td><a href="{% url 'edituser' user.id %}">{{ user.username }}</a></td> {% endcomment %} -->
+                    <td><a href=""></a>{{ user.email }}</td>
+                    <!-- <td><a href=""></a>{{ user.password }}</td> -->
+                    <!-- Add more cells for additional user class details -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% comment %} <!-- <button><a href="{% url 'addUserpage' %}">Add User</a></button> --> {% endcomment %}
+    {% comment %} <a href="{% url 'addUserpage' %}"><button>Add User</button></a> {% endcomment %}
+</div>
+</body>
+</html>
