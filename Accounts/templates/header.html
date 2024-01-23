@@ -10,11 +10,13 @@
 <body>
     <div class="header">
         <div class="logo">
-            <h1><a href="">Review Point</a></h1>
+            <h1><a href="{% url 'home' %}">Review Point</a></h1>
             {% if data %}
                 {{pass}}
+            {% elif users %}
+            <a href="#"><button>Add User</button></a>
             {% elif movies %}
-            <button>Add movies</button>
+            <a href="{% url 'Master:addmoviesform' %}"><button>Add movies</button></a>
             {% endif %}
         </div>
         <div class="fields">

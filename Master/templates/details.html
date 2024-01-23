@@ -1,0 +1,30 @@
+{% load static %}
+{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/details.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="img">
+            <img src="{{movie.image}}" alt="{{movie.name}}">
+        </div>
+        <div class="about">
+            <h3 style="font-size: 50px;">{{movie.title}}</h3>
+            <p style="font-size: 20px; color:black">{{movie.description}}</p>
+            <h5 style="font-size: 22px;">Director - {{movie.director}}</h5>
+            <h5 style="font-size: 22px;">Cast - {{movie.cast}}</h5>
+            {% if data %}
+                {{pass}}
+            {% else %}
+                <a href="{% url 'Master:edit_movie' movie.id %}"><button>Edit Movie</button></a>
+                <a href="{% url 'Master:deletemovie' movie.id %}"><button onclick="return confirm('Are you sure you want to delete this movie')">Delete Movie</button></a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

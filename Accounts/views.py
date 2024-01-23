@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from Master.models import *
 # from django.contrib.auth import authenticate,login,logout
 
 # Create your views here.
@@ -62,3 +63,15 @@ def login_user(request):
 def logout_user(request):
     request.session.clear()
     return redirect("/")
+
+def movielist(request):
+    username = request.session.get('username', None)
+    allmovies = Movie.objects.all()
+    context = {
+        "movies": allmovies,
+        "data": username,
+    } 
+    # data={
+    #        "username": username,  # Adding the username to the context
+    # }
+    return render(request,"movies.html",context)
