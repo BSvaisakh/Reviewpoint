@@ -25,7 +25,38 @@ def admin_login(request):
 
 def usermanagement(request):
     users = User.objects.all()
-    return render(request,"usermanage.html",{"users" : users})     
+    return render(request,"usermanage.html",{"users" : users})  
+
+def add_user(request):
+    if request.method == "POST":
+        form = AddUserForm(request.POST) 
+        
+        if form.is_valid():
+            user = form.save()
+            user.save()
+            return redirect('Master:usermanagement')
+    else :
+        form = AddUserForm()
+        return render(request,"addUser.html",{"form":form})  
+    
+# def edit_user(request,id):
+#     user = User.objects.get(id=id)
+#     if request.method == "POST":
+#         form = AddUserForm(request.POST or None)
+#         if form.is_valid():
+#             data=form.save(commit=False)
+#             data.save()
+#             return redirect("Master:usermanagement",id)
+#     else :
+#         form = AddUserForm(instance=user)
+#     return render(request,'addUser.html',{"form":form})
+    
+def delete_user(request,id):
+    if request.method == "GET":
+        user = User.objects.get(id=id)
+        user.delete()
+        return redirect('Master:usermanagement')   
+    return redirect('Master:usermanagement')  
 
 def moviemanagement(request):
     

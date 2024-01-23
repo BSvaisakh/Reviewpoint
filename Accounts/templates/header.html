@@ -14,7 +14,7 @@
             {% if data %}
                 {{pass}}
             {% elif users %}
-            <a href="#"><button>Add User</button></a>
+            <a href="{% url 'Master:addUser' %}"><button>Add User</button></a>
             {% elif movies %}
             <a href="{% url 'Master:addmoviesform' %}"><button>Add movies</button></a>
             {% endif %}

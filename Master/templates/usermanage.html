@@ -26,6 +26,8 @@
             <tr>
                 <th>Username</th>
                 <th>Email</th>
+                {% comment %} <!-- <th>Edit User</th> --> {% endcomment %}
+                <th>Delete User</th>
                 <!-- <th>Password</th> -->
                 <!-- Add more columns for additional user class details -->
             </tr>
@@ -33,9 +35,11 @@
         <tbody>
             {% for user in users %}
                 <tr>
-                    <td><a href="">{{user.username}}</a></td>
+                    <td style="color: beige;">{{user.username}}</td>
                     <!-- {% comment %} <td><a href="{% url 'edituser' user.id %}">{{ user.username }}</a></td> {% endcomment %} -->
-                    <td><a href=""></a>{{ user.email }}</td>
+                    <td>{{ user.email }}</td>
+                    {% comment %} <!-- <td><a href="{% url 'Master:editUser' user.id %}" style="color: skyblue;">Edit</a></td> --> {% endcomment %}
+                    <td><a href="{% url 'Master:deleteUser' user.id %}" style="color: red;">Delete</a></td>
                     <!-- <td><a href=""></a>{{ user.password }}</td> -->
                     <!-- Add more cells for additional user class details -->
                 </tr>
