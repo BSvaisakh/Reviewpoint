@@ -6,8 +6,11 @@ from Master.models import *
 
 # Create your views here.
 
+##################HOME PAGE####################
 def home(request):
     return render(request,"home.html")
+
+#####################USER REGISTRATION###############
 
 def Register_user(request):
     if request.method == "POST" :
@@ -29,6 +32,8 @@ def Register_user(request):
             """
              return HttpResponse(response)
     return redirect('home')
+
+#######################USER LOGIN#######################
 
 def login_user(request):
     if request.method == "GET":
@@ -60,9 +65,13 @@ def login_user(request):
             """
             return HttpResponse(response)
 
+###################USER LOGOUT######################
+
 def logout_user(request):
     request.session.clear()
     return redirect("/")
+
+###################MOVIES LIST####################
 
 def movielist(request):
     username = request.session.get('username', None)
@@ -71,7 +80,16 @@ def movielist(request):
         "movies": allmovies,
         "data": username,
     } 
-    # data={
-    #        "username": username,  # Adding the username to the context
-    # }
-    return render(request,"movies.html",context)
+    return render(request,"shows.html",context)
+
+#######################SERIES LIST####################
+
+def series_list(request):
+    username = request.session.get('username', None)
+    allseries = Series.objects.all()
+    context = {
+        "series" : allseries,
+        "data" : username,
+    }
+    return render(request,"shows.html",context)
+    

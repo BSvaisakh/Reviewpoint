@@ -4,9 +4,16 @@ from .models import *
 from .forms import *
 # Create your views here.
 
+###################ADMIN###########################
+
+##############ADMIN LOGIN PAGE############
+
 def master_page(request):
     request.session.clear()
     return render(request,"admin_login.html")
+
+############# Admin DASHBOARD##############
+
 def admin_login(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -23,10 +30,14 @@ def admin_login(request):
             return redirect('home')
     return redirect('home')
 
+####################USERS#########################
+
+###########User Management#############
 def usermanagement(request):
     users = User.objects.all()
     return render(request,"usermanage.html",{"users" : users})  
 
+###################ADD USER#################
 def add_user(request):
     if request.method == "POST":
         form = AddUserForm(request.POST) 
@@ -37,7 +48,7 @@ def add_user(request):
             return redirect('Master:usermanagement')
     else :
         form = AddUserForm()
-        return render(request,"addUser.html",{"form":form})  
+        return render(request,"addform.html",{"form":form})  
     
 # def edit_user(request,id):
 #     user = User.objects.get(id=id)
@@ -51,6 +62,7 @@ def add_user(request):
 #         form = AddUserForm(instance=user)
 #     return render(request,'addUser.html',{"form":form})
     
+#################EDIT USER##############
 def delete_user(request,id):
     if request.method == "GET":
         user = User.objects.get(id=id)
@@ -58,13 +70,19 @@ def delete_user(request,id):
         return redirect('Master:usermanagement')   
     return redirect('Master:usermanagement')  
 
+############MOVIES##################################
+
+###############MOVIE MANAGEMENT##############
+
 def moviemanagement(request):
     
     allmovies = Movie.objects.all()
     context = {
         "movies" : allmovies
     } 
-    return render(request,"movies.html",context)     
+    return render(request,"shows.html",context)     
+
+#################MOVIE DETAILS PAGE#################
 
 def movie_details(request,id):
     user = User.objects.all()
@@ -78,6 +96,7 @@ def movie_details(request,id):
     
     return render (request,"details.html",context)
 
+#####################ADDING MOVIES###################
 def addmoviesform(request):
     if request.method == "POST":
         form = Movieform(request.POST or None)
@@ -88,7 +107,9 @@ def addmoviesform(request):
         print("form.errors")
     else :
         form =Movieform()
-        return render(request,"addmovies.html",{"form": form})
+        return render(request,"addform.html",{"form": form})
+
+####################EDIT MOVIES#####################
 
 def edit_movie(request,id):
     movie = Movie.objects.get(id=id)
@@ -100,12 +121,74 @@ def edit_movie(request,id):
             return redirect("Master:moviedetails",id)
     else :
         form = Movieform(instance=movie)
-    return render(request,"addmovies.html",{"form":form})
+    return render(request,"addform.html",{"form":form})
     
-
+###############DELETE MOVIES###################
 
 def delete_movie(request,id):
     if request.method == "GET" :
         movie = Movie.objects.get(id=id)
         movie.delete()
         return redirect('Master:moviemanagement')
+    
+###################WEB SERIES#####################
+
+#####################SERIES MANAGEMENT###################    
+
+def seriesmanagement(request):
+    
+    allseries = Series.objects.all()
+    context = {
+        "series" : allseries
+    } 
+    return render(request,"shows.html",context)  
+
+#############SERIES DETAILS PAGE#################
+
+def series_details(request,id):
+    user = User.objects.all()
+    if user :
+        username = request.session.get('username', None)
+    series = Series.objects.get(id=id)
+    context = {
+        "series" : series,
+        "data": username,
+    }
+    
+    return render (request,"details.html",context)
+
+#################SERIES ADDING PAGE######################
+
+def addseriesform(request):
+    if request.method == "POST":
+        form = Seriesform(request.POST or None)
+        if form.is_valid():
+            data=form.save(commit=False)
+            data.save()
+            return redirect('Master:seriesManagement')
+        print("form.errors")
+    else :
+        form =Seriesform()
+        return render(request,"addform.html",{"form": form})
+    
+#####################SERIES EDITING###################
+    
+def edit_series(request,id):
+    series = Series.objects.get(id=id)
+    if request.method == "POST" :
+        form = Seriesform(request.POST or None,instance=series)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.save()
+            return redirect("Master:seriesdetails",id)
+    else :
+        form = Seriesform(instance=series)
+    return render(request,"addform.html",{"form":form})
+    
+###############DELETING SERIES###################
+
+def delete_series(request,id):
+    if request.method == "GET" :
+        series = Series.objects.get(id=id)
+        series.delete()
+        return redirect('Master:seriesManagement')

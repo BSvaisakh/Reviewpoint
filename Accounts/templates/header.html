@@ -17,6 +17,8 @@
             <a href="{% url 'Master:addUser' %}"><button>Add User</button></a>
             {% elif movies %}
             <a href="{% url 'Master:addmoviesform' %}"><button>Add movies</button></a>
+            {% elif series %}
+            <a href="{% url 'Master:addseriesform' %}"><button>Add Series</button></a>
             {% endif %}
         </div>
         <div class="fields">

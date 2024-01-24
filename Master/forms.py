@@ -13,3 +13,8 @@ class AddUserForm(UserCreationForm):
         model = User
         fields = ("username","email")
         
+class Seriesform(forms.ModelForm):
+    class Meta:
+        model = Series
+        fields = ("title","description","genre","creators","cast","status","seasons","episodes","image")
+        

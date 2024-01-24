@@ -10,6 +10,7 @@
 </head>
 <body>
     <div class="container">
+        {% if movie %}
         <div class="img">
             <img src="{{movie.image}}" alt="{{movie.name}}">
         </div>
@@ -21,10 +22,30 @@
             {% if data %}
                 {{pass}}
             {% else %}
-                <a href="{% url 'Master:edit_movie' movie.id %}"><button>Edit Movie</button></a>
+                <a href="{% url 'Master:editmovie' movie.id %}"><button>Edit Movie</button></a>
                 <a href="{% url 'Master:deletemovie' movie.id %}"><button onclick="return confirm('Are you sure you want to delete this movie')">Delete Movie</button></a>
             {% endif %}
         </div>
+        {% endif %}
+        {% if series %}
+        <div class="img">
+            <img src="{{series.image}}" alt="{{movie.name}}">
+        </div>
+        <div class="about">
+            <h3 style="font-size: 50px;">{{series.title}}</h3>
+            <p style="font-size: 20px; color:black">{{series.description}}</p>
+            <h5 style="font-size: 22px;">Creators  - {{series.creators}}</h5>
+            <h5 style="font-size: 22px;">Cast - {{series.cast}}</h5>
+            <h5 style="font-size: 22px;">Status - {{series.status}}</h5>
+            <h5 style="font-size: 22px;">No.of.Seasons - {{series.seasons}}</h5>
+            <h5 style="font-size: 22px;">No.of episodes - {{series.episodes}}</h5>
+            {% if data %}
+                {{pass}}
+            {% else %}
+            <a href="{% url 'Master:editseries' series.id %}"><button>Edit Series</button></a>
+            <a href="{% url 'Master:deleteseries' series.id %}"><button onclick="return confirm('Are you sure you want to delete this web series')">Delete Series</button></a>
+            {% endif %}
+        {% endif %}
     </div>
 </body>
 </html>
