@@ -31,4 +31,12 @@ urlpatterns = [
    path('addseriesform/',views.addseriesform,name="addseriesform"),
    path('editseries/<int:id>',views.edit_series,name="editseries"),
     path('deleteseries/<int:id>',views.delete_series,name="deleteseries"),
+    
+    ################Animes###########################################
+    path('animemanagement/',views.animemanagement,name="animeManagement"),
+    path('animedetails/<int:id>',views.anime_details,name="animedetails"),
+    path('addanimeform/',views.add_anime,name="addanimeform"),
+    path('editanime/<int:id>',views.edit_anime,name="editanime"),
+    path('deleteanime/<int:id>',views.delete_anime,name="deleteanime")
+    
 ]

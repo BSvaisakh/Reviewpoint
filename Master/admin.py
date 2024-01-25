@@ -4,3 +4,4 @@ from .models import *
 
 admin.site.register(Movie)
 admin.site.register(Series)
+admin.site.register(Anime)

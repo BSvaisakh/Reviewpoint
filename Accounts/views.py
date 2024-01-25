@@ -92,4 +92,13 @@ def series_list(request):
         "data" : username,
     }
     return render(request,"shows.html",context)
+
+def anime_list(request):
+    username = request.session.get('username', None)
+    allanime = Anime.objects.all()
+    context = {
+        "animes" : allanime,
+        "data" : username,
+    }
+    return render(request,"shows.html",context)
     

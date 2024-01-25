@@ -17,4 +17,9 @@ class Seriesform(forms.ModelForm):
     class Meta:
         model = Series
         fields = ("title","description","genre","creators","cast","status","seasons","episodes","image")
-        
+
+
+class Animeform(forms.ModelForm):
+    class Meta:
+        model = Anime
+        fields = ("title","description","genre","Author","status","episodes","image")

@@ -24,10 +24,21 @@
         {% if series %}
         {% for series in series %}
         <div class="movie-card">
-            <a href="{% url 'Master:seriesdetails' series.id %}"><img src="{{ series.image }}" alt="{{ movie.title }}"></a>
+            <a href="{% url 'Master:seriesdetails' series.id %}"><img src="{{ series.image }}" alt="{{ series.title }}"></a>
             <div class="movie-info">   
                 <h2>{{ series.title }}</h2>
                 <p>{{ series.genre}}</p>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% if animes %}
+        {% for anime in animes %}
+        <div class="movie-card">
+            <a href="{% url 'Master:animedetails' anime.id %}"><img src="{{ anime.image }}" alt="{{ anime.title }}"></a>
+            <div class="movie-info">   
+                <h2>{{ anime.title }}</h2>
+                <p>{{ anime.genre}}</p>
             </div>
         </div>
         {% endfor %}

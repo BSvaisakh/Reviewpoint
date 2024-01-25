@@ -7,5 +7,6 @@ urlpatterns = [
    path('login/',views.login_user,name="login"),
     path('logout/',views.logout_user,name="logout"),
     path('movielist/',views.movielist,name="movielist"),
-    path('serieslist/',views.series_list,name="serieslist")
+    path('serieslist/',views.series_list,name="serieslist"),
+     path('animelist/',views.anime_list,name="animelist"),
 ]

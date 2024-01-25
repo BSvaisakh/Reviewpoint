@@ -192,3 +192,65 @@ def delete_series(request,id):
         series = Series.objects.get(id=id)
         series.delete()
         return redirect('Master:seriesManagement')
+    
+###############################################################
+
+#################Anime####################################
+
+def animemanagement(request):
+    
+    allanime = Anime.objects.all()
+    context = {
+        "animes" : allanime
+    } 
+    return render(request,"shows.html",context)  
+
+#############Anime DETAILS PAGE#################
+
+def anime_details(request,id):
+    user = User.objects.all()
+    if user :
+        username = request.session.get('username', None)
+    anime = Anime.objects.get(id=id)
+    context = {
+        "animes" : anime,
+        "data": username,
+    }
+    return render (request,"details.html",context)
+
+######################Add anime##########################
+
+def add_anime(request):
+    if request.method == "POST":
+        form = Animeform(request.POST or None)
+        if form.is_valid():
+            data=form.save(commit=False)
+            data.save()
+            return redirect('Master:animeManagement')
+        print("form.errors")
+    else :
+        form =Animeform()
+        return render(request,"addform.html",{"form": form})
+    
+####################Edit Anime########################
+
+def edit_anime(request,id):
+    anime = Anime.objects.get(id=id)
+    if request.method=="POST":
+        form = Animeform(request.POST or None ,instance=anime)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.save()
+            return redirect("Master:animedetails",id)
+    else :
+        form = Animeform(instance=anime)
+        return render(request,"addform.html",{"form":form})
+        
+#################Delete Anime###############################
+
+def delete_anime(request,id):
+    if request.method =="GET":
+        anime = Anime.objects.get(id=id)
+        anime.delete()
+        return redirect("Master:animeManagement")
+        

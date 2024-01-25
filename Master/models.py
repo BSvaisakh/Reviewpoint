@@ -38,3 +38,19 @@ class Series(models.Model):
     
     def __str__(self):
         return self.title
+    
+class Anime(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    genre = models.CharField(max_length=100)
+    Author = models.CharField(max_length=50)
+    ONGOING = 'ongoing'
+    FINISHED = 'finished'
+    STATUS_CHOICES = [
+        (ONGOING, 'Ongoing'),
+        (FINISHED, 'Finished'),
+    ]
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=ONGOING)
+    episodes = models.IntegerField()
+    image=models.URLField(default = None,null = True)
+    
