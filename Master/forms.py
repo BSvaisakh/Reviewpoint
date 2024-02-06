@@ -23,3 +23,18 @@ class Animeform(forms.ModelForm):
     class Meta:
         model = Anime
         fields = ("title","description","genre","Author","status","episodes","image")
+        
+class MovieReviewform(forms.ModelForm):
+    class Meta:
+        model = MovieReview
+        fields=("comment","rating")  
+        
+class seriesReviewform(forms.ModelForm):
+    class Meta:
+        model = SeriesReview
+        fields=("comment","rating")  
+        
+class AnimeReviewform(forms.ModelForm):
+    class Meta:
+        model = AnimeReview
+        fields=("comment","rating") 

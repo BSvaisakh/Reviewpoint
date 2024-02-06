@@ -1,7 +1,9 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from .models import *
 from .forms import *
+from django.db.models import Avg
 # Create your views here.
 
 ###################ADMIN###########################
@@ -86,12 +88,19 @@ def moviemanagement(request):
 
 def movie_details(request,id):
     user = User.objects.all()
+    movie = Movie.objects.get(id=id)
+    reviews = MovieReview.objects.filter(movie=id).order_by("comment")
+    average = reviews.aggregate(Avg("rating"))['rating__avg']
+    if average ==None :
+        average = 0 
+    average=round(average,2)
     if user :
         username = request.session.get('username', None)
-    movie = Movie.objects.get(id=id)
     context = {
         "movie" : movie,
         "data": username,
+        "reviews" : reviews,
+        "average" : average,
     }
     
     return render (request,"details.html",context)
@@ -107,7 +116,7 @@ def addmoviesform(request):
         print("form.errors")
     else :
         form =Movieform()
-        return render(request,"addform.html",{"form": form})
+        return render(request,"addform.html",{"form": form,"caption":"Add Movies"})
 
 ####################EDIT MOVIES#####################
 
@@ -121,7 +130,7 @@ def edit_movie(request,id):
             return redirect("Master:moviedetails",id)
     else :
         form = Movieform(instance=movie)
-    return render(request,"addform.html",{"form":form})
+    return render(request,"addform.html",{"form":form,"caption":"Edit Movies"})
     
 ###############DELETE MOVIES###################
 
@@ -147,12 +156,14 @@ def seriesmanagement(request):
 
 def series_details(request,id):
     user = User.objects.all()
+    reviews = SeriesReview.objects.filter(series=id).order_by("comment")
     if user :
         username = request.session.get('username', None)
     series = Series.objects.get(id=id)
     context = {
         "series" : series,
         "data": username,
+        "reviews" : reviews,
     }
     
     return render (request,"details.html",context)
@@ -169,7 +180,7 @@ def addseriesform(request):
         print("form.errors")
     else :
         form =Seriesform()
-        return render(request,"addform.html",{"form": form})
+        return render(request,"addform.html",{"form": form,"caption":"Add Series"})
     
 #####################SERIES EDITING###################
     
@@ -183,7 +194,7 @@ def edit_series(request,id):
             return redirect("Master:seriesdetails",id)
     else :
         form = Seriesform(instance=series)
-    return render(request,"addform.html",{"form":form})
+    return render(request,"addform.html",{"form":form,"caption":"Edit Series"})
     
 ###############DELETING SERIES###################
 
@@ -209,12 +220,14 @@ def animemanagement(request):
 
 def anime_details(request,id):
     user = User.objects.all()
+    reviews = AnimeReview.objects.filter(anime=id).order_by("comment")
     if user :
         username = request.session.get('username', None)
     anime = Anime.objects.get(id=id)
     context = {
         "animes" : anime,
         "data": username,
+        "reviews" : reviews,
     }
     return render (request,"details.html",context)
 
@@ -230,7 +243,7 @@ def add_anime(request):
         print("form.errors")
     else :
         form =Animeform()
-        return render(request,"addform.html",{"form": form})
+        return render(request,"addform.html",{"form": form,"caption":"Add Anime"})
     
 ####################Edit Anime########################
 
@@ -244,7 +257,7 @@ def edit_anime(request,id):
             return redirect("Master:animedetails",id)
     else :
         form = Animeform(instance=anime)
-        return render(request,"addform.html",{"form":form})
+        return render(request,"addform.html",{"form":form,"caption":"Edit Anime"})
         
 #################Delete Anime###############################
 
@@ -253,4 +266,96 @@ def delete_anime(request,id):
         anime = Anime.objects.get(id=id)
         anime.delete()
         return redirect("Master:animeManagement")
+    
+####################REVIEW####################################
+
+#####################ADD REVIEW###########################
+def add_Movie_Review(request,id):
+    movie = Movie.objects.get(id=id)
+    if request.method == "POST":
+        form = MovieReviewform(request.POST)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.comment = request.POST["comment"]
+            data.rating = request.POST["rating"]
+            data.user = request.user
+            data.movie = movie
+            data.save()
+            return redirect("Master:moviedetails",id)
+        else:
+            form = MovieReviewform
+        return render(request,"details.html",{"form":form})
+    
+def add_series_Review(request,id):
+    series = Series.objects.get(id=id)
+    if request.method == "POST":
+        form = seriesReviewform(request.POST)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.comment = request.POST["comment"]
+            data.rating = request.POST["rating"]
+            data.user = request.user
+            data.series = series
+            data.save()
+            return redirect("Master:seriesdetails",id)
+        else:
+            form = seriesReviewform
+        return render(request,"details.html",{"form":form})
+    
+def add_anime_Review(request,id):
+    anime = Anime.objects.get(id=id)
+    if request.method == "POST":
+        form = AnimeReviewform(request.POST)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.comment = request.POST["comment"]
+            data.rating = request.POST["rating"]
+            data.user = request.user
+            data.anime = anime
+            data.save()
+            return redirect("Master:animedetails",id)
+        else:
+            form = AnimeReviewform
+        return render(request,"details.html",{"form":anime})
+    
+def edit_movie_reviews(request,movie_id,review_id):
+    if request.user.is_authenticated:
+        movie = Movie.objects.get(id=movie_id)
+        review = MovieReview.objects.get(movie=movie,id = review_id)
         
+        # check the review was done by the logged in user
+        
+        if request.user == review.user:
+            if request.method == "POST":
+                form = MovieReviewform(request.POST,instance=review)
+                if form.is_valid():
+                    data =form.save(commit=False)
+                    if (data.rating > 10) or (data.rating < 0):
+                        error = "Invalid Range.Please select rating from 0 to 10"
+                        return render(request,"editreview.html",{"error":error,"form":form})
+                    else :
+                        data.save()
+                        return redirect("Master:moviedetails",movie_id)
+            else :
+                form = MovieReviewform(instance=review)
+            return render(request,"editreview.html",{"form":form,"movies":movie})
+        else :
+            return redirect("Master:moviedetail",movie_id)
+    else :
+        return redirect("home")
+    
+def delete_movie_reviews(request,movie_id,review_id):
+    # if request.user.is_authenticated:
+        movie = Movie.objects.get(id=movie_id)
+        review = MovieReview.objects.get(movie=movie,id = review_id)
+        
+        # check the review was done by the logged in user
+        
+        # if request.user == review.user:
+        review.delete()
+       
+        return redirect("Master:moviedetails",movie_id)
+    # else :
+    #     return redirect("home") 
+   
+

@@ -2,7 +2,9 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from Master.models import *
-# from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate,login,logout
+from django.views.decorators.csrf import csrf_protect
+from .forms import *
 
 # Create your views here.
 
@@ -19,8 +21,10 @@ def Register_user(request):
         password = request.POST.get('password')
 
         if not User.objects.filter(username=username).exists():
-            user = User.objects.create(username=username,email=email,password=password)
+            user = User(username=username, email=email)
+            user.set_password(password)
             user.save()
+
             
             return redirect('home')
         else :
@@ -32,20 +36,22 @@ def Register_user(request):
             """
              return HttpResponse(response)
     return redirect('home')
+    
+   
 
 #######################USER LOGIN#######################
 
 def login_user(request):
-    if request.method == "GET":
-        return render(request,"home.html")
-    elif request.method == "POST":
+    # if request.method == "GET":
+    #     return render(request,"home.html")
+    if request.method == "POST":
         username=request.POST.get('username')
         password=request.POST.get('password')
         
-        user=User.objects.filter(username=username).first()
+        user=authenticate(username=username,password=password)
         if user is not None:
-            stored_password = user.password  # Assuming user.password contains the plain-text password
-            if password == stored_password:
+            if user.is_active:
+                login(request,user)
                 request.session['username'] = username
                 return render(request,"landing_page.html",{"data":username})
             else:
@@ -64,6 +70,12 @@ def login_user(request):
             </script>
             """
             return HttpResponse(response)
+        
+        
+def land(request):
+    username = request.session['username']
+    return render(request,"landing_page.html",{"data":username})
+
 
 ###################USER LOGOUT######################
 

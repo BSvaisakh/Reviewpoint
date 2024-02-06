@@ -3,6 +3,7 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    background: #000000da;
 }
 
 .container {
@@ -52,5 +53,92 @@ h5 {
     margin-bottom: 15px;
     color: #777;
 }
+.review{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #333;
+    padding: 15px;
+   
+}
+.moviereview{
+    display: flex;
+    flex-direction: column;
+}
+.rating{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+textarea{
+    width: 1200px;
+    height: 30vh;
+    margin: 10px;
+    font-size: 20px;
+    padding: 10px;
+    /* background-color: rgb(255,255, 255); */
+    border: none;
+}
+.rating-inp{
+    width: 500px;
+    height: 38px;
+    position: relative;
+    right: 80px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 18px;
+    background-color:  rgb(255, 255, 255);
+    border: none;
+}
+label{
+    font-size: 30px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    color: rgb(28, 149, 248);
+}
+.rating-btn{
+    width: 120px;
+    height: 38px;
+    justify-content: center;
+    position: relative;
+    left: 250px;
+    bottom: 50px;
+    background-color: transparent;
+    /* border-color: white; */
+    color: white;
+    border: 1.5px solid white;
+    transition: 0.3s ease-in-out;
+}
+.rating-btn:hover{
+    font-size: 15px;
+    /* color: rgb(28, 149, 248); */
+    background-color: orangered;
+}
+.reviewlist{
+    background-color: grey;
+    padding: 20px;
+    
+    
+}
+.reviews{
+    background:linear-gradient(white,rgb(198, 231, 242));
+    margin: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    overflow: none;
+    width: 950px;
+    height: auto;
+   
 
-
+}
+.post-p{
+    text-align: end;
+}
+.review-card{
+    margin-left: 90px;
+}

@@ -9,14 +9,16 @@
     <link rel="stylesheet" href="{% static 'css/landing_page.css' %}">
 </head>
 <body>
+    {% csrf_token %}
+
    <!-- <img src="../static/images/background.jpg" alt="" class="background-image"> -->
     <div class="main-container">
-        <div class="search">
-            <form action="">
+        {% comment %} <div class="search">
+            <form action="" method="post">
                 {% csrf_token %}
                 <input type="search" placeholder="Search Shows By Name" class="search-inp">
                 <input type="submit" placeholder="Search" class="search-btn">
-            </form>  
+            </form>    {% endcomment %}
         </div>
         <div class="movie-head">
             <h1>Movies</h1>
@@ -28,13 +30,16 @@
             <h1>Animes</h1>
         </div>
         <div class="types">
-            <a href="{% url 'movielist' %}"><div class="movies">
+            <a href="{% url 'movielist' %}" onclick="window.location.href=this.href; return false;"><div class="movies">
+               
                 <img src="{% static 'images/movie-posters.jpg' %}" alt="">
             </div></a>
             <a href="{% url 'serieslist' %}"><div class="movies">
+              
                 <img src="{% static 'images/web-posters-new.jpg' %}" alt="">
                 </div></a>
             <a href="{% url 'animelist' %}"><div class="movies">
+              
                 <img src="{% static 'images/anime-poster.jpg' %}" alt="">
                 
             </div></a>

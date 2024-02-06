@@ -9,8 +9,8 @@
     <title>Document</title>
 </head>
 <html>
-    <div class="container">
-        {% if movie %}
+    {% if movie %}
+    <div class="container">   
         <div class="img">
             <img src="{{movie.image}}" alt="{{movie.name}}">
         </div>
@@ -19,52 +19,143 @@
             <p style="font-size: 20px; color:black">{{movie.description}}</p>
             <h5 style="font-size: 22px;">Director - {{movie.director}}</h5>
             <h5 style="font-size: 22px;">Cast - {{movie.cast}}</h5>
+            <h5>Average - {{average}}/10</h5>
             {% if data %}
                 {{pass}}
             {% else %}
                 <a href="{% url 'Master:editmovie' movie.id %}"><button>Edit Movie</button></a>
                 <a href="{% url 'Master:deletemovie' movie.id %}"><button onclick="return confirm('Are you sure you want to delete this movie')">Delete Movie</button></a>
             {% endif %}
-            {% endif %}
-        {% if series %}
-        <div class="img">
-            <img src="{{series.image}}" alt="{{movie.name}}">
         </div>
-        <div class="about">
-            <h3 style="font-size: 50px;">{{series.title}}</h3>
-            <p style="font-size: 20px; color:black">{{series.description}}</p>
-            <h5 style="font-size: 22px;">Creators  - {{series.creators}}</h5>
-            <h5 style="font-size: 22px;">Cast - {{series.cast}}</h5>
-            <h5 style="font-size: 22px;">Status - {{series.status}}</h5>
-            <h5 style="font-size: 22px;">No.of.Seasons - {{series.seasons}}</h5>
-            <h5 style="font-size: 22px;">No.of episodes - {{series.episodes}}</h5>
-            {% if data %}
-                {{pass}}
-            {% else %}
-            <a href="{% url 'Master:editseries' series.id %}"><button>Edit Series</button></a>
-            <a href="{% url 'Master:deleteseries' series.id %}"><button onclick="return confirm('Are you sure you want to delete this web series')">Delete Series</button></a>
+    </div>
+    <div class="review">
+            <form action="{% url 'Master:movieReview' movie.id %}" method="post">
+                {% csrf_token %}
+            <div class="moviereview">
+                <label for="MovieReview">Add Review</label>
+                <textarea name="comment" id="" cols="30" rows="5"></textarea>
+            </div>
+            <div class="rating">
+                <label for="Rating" style="margin-bottom: 20px;">Add Rating</label>
+                <input type="integer" name="rating" class="rating-inp">
+                <input type="submit" class="rating-btn">
+            </div>
+        </form>
+    </div>
+    <div class="reviewlist">
+        <h1 style="text-align: center;">REVIEWS</h1>
+        <div class="review-card">
+        {% for review in reviews %}
+            <div class="reviews">
+            <p style="font-size: 25px; color: black;margin-bottom:5px">{{review.comment}}</p>
+            <p style="font-size: 15px; color:rgba(0, 0, 0, 0.548)" class="post-p">Posted by - {{review.user}}</p>
+            <p style="font-size: 20px; color: black;margin-bottom:5px">rating - {{review.rating}}</p>
+            {% if request.user == review.user %}
+            <a href="{% url 'Master:edit_movie_review' movie.id review.id %}">Edit</a>
+            <a href="{% url 'Master:delete_movie_review' movie.id review.id %}" onclick="return confirm('are you sure you want to delete this comment')">Delete</a>
             {% endif %}
+            {% if data %}
+            {{pass}}
+            {% else %}
+            <a href="{% url 'Master:delete_movie_review' movie.id review.id %}" onclick="return confirm('are you sure you want to delete this comment')">Delete</a>
+            {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+    {% endif %}   
+    {% if series %}
+        <div class="container">
+            <div class="img">
+                <img src="{{series.image}}" alt="{{movie.name}}">
+            </div>
+            <div class="about">
+                <h3 style="font-size: 50px;">{{series.title}}</h3>
+                <p style="font-size: 20px; color:black">{{series.description}}</p>
+                <h5 style="font-size: 22px;">Creators  - {{series.creators}}</h5>
+                <h5 style="font-size: 22px;">Cast - {{series.cast}}</h5>
+                <h5 style="font-size: 22px;">Status - {{series.status}}</h5>
+                <h5 style="font-size: 22px;">No.of.Seasons - {{series.seasons}}</h5>
+                <h5 style="font-size: 22px;">No.of episodes - {{series.episodes}}</h5>
+                {% if data %}
+                    {{pass}}
+                {% else %}
+                <a href="{% url 'Master:editseries' series.id %}"><button>Edit Series</button></a>
+                <a href="{% url 'Master:deleteseries' series.id %}"><button onclick="return confirm('Are you sure you want to delete this web series')">Delete Series</button></a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="review">
+                <form action="{% url 'Master:seriesReview' series.id %}" method="post">
+                    {% csrf_token %}
+                <div class="moviereview">
+                    <label for="MovieReview">Add Review</label>
+                    <textarea name="comment" id="" cols="30" rows="5"></textarea>
+                </div>
+                <div class="rating">
+                    <label for="Rating" style="margin-bottom: 20px;">Add Rating</label>
+                    <input type="number" name="rating" class="rating-inp">
+                    <input type="submit" class="rating-btn">
+                </div>
+            </form>
+        </div>
+        <div class="reviewlist">
+            <h1 style="text-align: center;">REVIEWS</h1>
+            {% for review in reviews %}
+                <div class="reviews">
+                <p style="font-size: 40px; color: black;margin-bottom:10px">{{review.comment}}</p>
+                <p style="font-size: 15px; color:rgba(0, 0, 0, 0.548)">Posted by - {{review.user}}</p>
+                <p></p>
+                </div>
+            {% endfor %}
+        </div>
         {% endif %}
         {% if animes %}
-        <div class="img">
-            <img src="{{animes.image}}" alt="{{animes.name}}">
+            <div class="container">
+                <div class="img">
+                    <img src="{{animes.image}}" alt="{{animes.name}}">
+                </div>
+            <div class="about">
+                <h3 style="font-size: 50px;">{{animes.title}}</h3>
+                <p style="font-size: 20px; color:black">{{animes.description}}</p>
+                <h5 style="font-size: 22px;">author  - {{animes.Author}}</h5>
+                <!-- <h5 style="font-size: 22px;">Cast - {{series.cast}}</h5> -->
+                <h5 style="font-size: 22px;">Status - {{animes.status}}</h5>
+                <!-- <h5 style="font-size: 22px;">No.of.Seasons - {{series.seasons}}</h5> -->
+                <h5 style="font-size: 22px;">No.of episodes - {{animes.episodes}}</h5>
+                {% if data %}
+                    {{pass}}
+                {% else %}
+                <a href="{% url 'Master:editanime' animes.id %}"><button>Edit anime</button></a>
+                <a href="{% url 'Master:deleteanime' animes.id %}"><button onclick="return confirm('Are you sure you want to delete this anime')">Delete anime</button></a>
+                {% endif %}
+                </div>
+            </div>
+            <div class="review">
+                <form action="{% url 'Master:animeReview' animes.id %}" method="post">
+                    {% csrf_token %}
+                <div class="moviereview">
+                    <label for="MovieReview">Add Review</label>
+                    <textarea name="comment" id="" cols="30" rows="5"></textarea>
+                </div>
+                <div class="rating">
+                    <label for="Rating" style="margin-bottom: 20px;">Add Rating</label>
+                    <input type="number" name="rating" class="rating-inp">
+                    <input type="submit" class="rating-btn">
+                </div>
+            </form>
         </div>
-        <div class="about">
-            <h3 style="font-size: 50px;">{{animes.title}}</h3>
-            <p style="font-size: 20px; color:black">{{animes.description}}</p>
-            <h5 style="font-size: 22px;">author  - {{animes.Author}}</h5>
-            <!-- <h5 style="font-size: 22px;">Cast - {{series.cast}}</h5> -->
-            <h5 style="font-size: 22px;">Status - {{animes.status}}</h5>
-            <!-- <h5 style="font-size: 22px;">No.of.Seasons - {{series.seasons}}</h5> -->
-            <h5 style="font-size: 22px;">No.of episodes - {{animes.episodes}}</h5>
-            {% if data %}
-                {{pass}}
-            {% else %}
-            <a href="{% url 'Master:editanime' animes.id %}"><button>Edit anime</button></a>
-            <a href="{% url 'Master:deleteanime' animes.id %}"><button onclick="return confirm('Are you sure you want to delete this anime')">Delete anime</button></a>
-            {% endif %}
+        <div class="reviewlist">
+            <h1 style="text-align: center;">REVIEWS</h1>
+            {% for review in reviews %}
+                <div class="reviews">
+                <p style="font-size: 40px; color: black;margin-bottom:10px">{{review.comment}}</p>
+                <p style="font-size: 15px; color:rgba(0, 0, 0, 0.548)">Posted by - {{review.user}}</p>
+                </div>
+            {% endfor %}
+        </div>
         {% endif %}
-        </div>
+            
+        </html>
+    </body>
     </html>
-</body>
-</html>

@@ -70,3 +70,25 @@ p{
     padding: 5px;
     color: black;
 }
+.search{
+    /* background: red; */
+    width: 500px;
+    text-align: center;
+}
+.search-inp{
+   width: 270px;
+   height: 28px;
+   margin-top: 23px;
+   color: black;
+   padding: 5px;
+    border: 1px solid white;
+    background: transparent;
+}
+.search-btn{
+    width: 70px;
+    height: 30px;
+    margin-left: 5px;
+    color: white;
+    border: 1px solid steelblue;
+    background: transparent;
+}
